@@ -28,11 +28,8 @@ const PropertyForm = () => {
   const handleOpenAddress = () => {};
   return (
     <>
-      <div className=" flex md:flex-row flex-col md:justify-between pt-6">
+      <div className=" flex md:flex-row flex-col md:justify-between pt-12">
         <div className="lg:w-[65%] xl:w-[45%] w-full lg:pr-4">
-          <h2 className="self-stretch text-[#2C363F] md:text-[26px] text-xl font-extrabold leading-[normal]">
-            Trust Agent
-          </h2>
           <h2 className="self-stretch text-[#2C363F] md:text-[28px] text-xl font-extrabold leading-[normal]">
             Add Property Details
           </h2>

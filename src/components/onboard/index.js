@@ -3,6 +3,7 @@ import OtpInput from "react-otp-input";
 import { Link, useLocation } from "react-router-dom";
 import Tutorial from "./pages/Tutorial";
 import PropertyForm from "./pages/RentForm";
+import SellForm from "./pages/SellForm";
 
 const OnBoardPage = () => {
   const [page, setPage] = useState(1);
@@ -24,9 +25,11 @@ const OnBoardPage = () => {
         />
 
         <div className="text-right text-sm font-medium mt-4">20% Completed</div>
+        <p className="font-[800] text-[26px] text-[#2C363F]">Trust Agent</p>
       </div>
       {/* <Tutorial /> */}
-      <PropertyForm />
+      {/* <PropertyForm /> */}
+      <SellForm />
       <div className=" py-4 px-8 flex justify-end gap-10 items-center">
         {page > 1 ? (
           <button

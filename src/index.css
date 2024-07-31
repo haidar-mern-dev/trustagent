@@ -1,7 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+:root {
+  --theme-color: #ffbf00;
+  --light-theme: #fff9e5;
+}
 body {
   font-family: "Plus Jakarta Sans", sans-serif;
 }
@@ -19,11 +22,21 @@ body {
   top: 0.5em; /* Align the bullet vertically with the text */
   width: 0.5em;
   height: 0.5em;
-  background-color: #ec4899; /* Custom bullet color */
+  background-color: var(--theme-color); /* Custom bullet color */
   border-radius: 50%; /* Make the bullet a circle */
 }
 .otp_container div {
   display: flex;
   justify-content: space-between;
   width: 100%;
+}
+.main_container {
+  background-image: url("/public/assets/bg.png");
+}
+.react_select svg {
+  fill: var(--theme-color);
+}
+
+.react_select input {
+  height: 37px;
 }

@@ -4,6 +4,7 @@
 :root {
   --theme-color: #ffbf00;
   --light-theme: #fff9e5;
+  --custom-gray: rgba(44, 54, 63, 1);
 }
 body {
   font-family: "Plus Jakarta Sans", sans-serif;

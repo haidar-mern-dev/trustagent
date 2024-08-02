@@ -9,6 +9,7 @@ module.exports = {
       colors: {
         theme_color: "var(--theme-color)",
         light_theme: "var(--light-theme)",
+        custom_gray: "var(--custom-gray)",
       },
     },
   },

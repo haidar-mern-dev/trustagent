@@ -171,6 +171,7 @@ const Verified = ()=>{
   />
 </svg>
  };
+
 export default{
   SaveMoney,
   locationsvg,
@@ -191,3 +192,4 @@ export default{
   SendIcon
 
 }
+

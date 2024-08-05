@@ -38,11 +38,12 @@ const inputData = [
 ];
 
 const validationSchema = Yup.object({
-  firstName: Yup.string().required("Required"),
-  lastName: Yup.string().required("Required"),
-  email: Yup.string().email("Invalid email address").required("Required"),
-  phoneNo: Yup.string().required("Required"),
-  agencyName: Yup.string().required("Required"),
+  area: Yup.string().required("Required"),
+  licenseNumber: Yup.string().required("Required"),
+  license: Yup.string().required("Required"),
+  licenseNo: Yup.string().required("Required"),
+  bio: Yup.string().required("Required"),
+  links: Yup.string().required("Required"),
 });
 
 const AgencyProfile = () => {

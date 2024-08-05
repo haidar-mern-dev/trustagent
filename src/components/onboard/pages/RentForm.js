@@ -7,8 +7,9 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import { locationsvg, MoreVert } from "../../../assets/svgs";
 import { setFormData } from "../../../redux/formSlice"; // Adjust the import path according to your project structure
+import { Country, State, City } from "country-state-city";
 
-const options = [
+const propertyOptions = [
   { value: "house", label: "House" },
   { value: "apartment", label: "Apartment" },
   { value: "townhouse", label: "Townhouse" },
@@ -18,36 +19,179 @@ const options = [
 const PropertyForm = () => {
   const dispatch = useDispatch();
   const formData = useSelector((state) => state.form.formData);
+  console.log(formData);
 
   const [address, setAddress] = useState(formData.address || "");
   const [propertyFor, setPropertyFor] = useState(formData.propertyFor || "");
+  const [country, setCountry] = useState(formData.country);
+  const [state, setState] = useState(formData.state || "");
+  const [city, setCity] = useState(formData.city || "");
+  const [showAddressForm, setShowAddressForm] = useState(false);
+
+  const countryOptions = Country.getAllCountries().map((country) => ({
+    value: country.isoCode,
+    label: country.name,
+  }));
+
+  const stateOptions = State.getStatesOfCountry(country?.value).map(
+    (state) => ({
+      value: state.isoCode,
+      label: state.name,
+    })
+  );
+
+  const cityOptions = City.getCitiesOfState(country?.value, state?.value).map(
+    (city) => ({
+      value: city.name,
+      label: city.name,
+    })
+  );
 
   useEffect(() => {
-    // Save form data to Redux store
-    dispatch(setFormData({ address, propertyFor }));
-  }, [address, propertyFor, dispatch]);
+    if (formData) {
+      handleCountryChange(formData.country);
+      handleStateChange(formData?.state, formData.country);
+      handleCityChange(formData.city, formData.country, formData.state);
+    }
+  }, []);
 
   const handleChangeAddress = (newAddress) => {
     setAddress(newAddress);
   };
 
-  const handleSelectAddress = (newAddress) => {
-    setAddress(newAddress);
-    geocodeByAddress(newAddress)
-      .then((results) => getLatLng(results[0]))
-      .then((latLng) => console.log("Success", latLng))
-      .catch((error) => console.error("Error", error));
+  const handleOpenAddress = () => {
+    setShowAddressForm(!showAddressForm);
   };
-
-  const handleOpenAddress = () => {};
 
   const handleRadioChange = (e) => {
     setPropertyFor(e.target.value);
   };
 
+  const handleCountryChange = (selectedOption) => {
+    const selectedCountry = countryOptions.find(
+      (country) => country.label == selectedOption
+    );
+    setCountry(selectedCountry);
+    setState("");
+    setCity("");
+    dispatch(setFormData({ country: selectedOption, state: "", city: "" }));
+  };
+
+  const handleStateChange = (selectedOption, count) => {
+    if (count) {
+      const selectedCountry = countryOptions.find(
+        (country) => country.label == count
+      );
+      const stateOptions = State.getStatesOfCountry(selectedCountry?.value).map(
+        (state) => ({
+          value: state.isoCode,
+          label: state.name,
+        })
+      );
+      const selectedState = stateOptions.find(
+        (state) => state.label === selectedOption
+      );
+
+      setState(selectedState);
+      dispatch(setFormData({ state: selectedOption, city: "" }));
+      setCity("");
+    } else {
+      const selectedState = stateOptions.find(
+        (state) => state.label === selectedOption
+      );
+      setState(selectedState);
+      setCity("");
+      dispatch(setFormData({ state: selectedOption, city: "" }));
+    }
+  };
+
+  const handleCityChange = (selectedOption, countr, stat) => {
+    if (countr) {
+      const selectedCountry = countryOptions.find(
+        (country) => country.label == countr
+      );
+      const stateOptions = State.getStatesOfCountry(selectedCountry?.value).map(
+        (state) => ({
+          value: state.isoCode,
+          label: state.name,
+        })
+      );
+      const selectedState = stateOptions.find((state) => state.label === stat);
+      const cityOptions = City.getCitiesOfState(
+        selectedCountry?.value,
+        selectedState?.value
+      ).map((city) => ({
+        value: city.name,
+        label: city.name,
+      }));
+      const selectedCity = cityOptions.find(
+        (state) => state.label === selectedOption
+      );
+      setCity(selectedCity);
+      dispatch(setFormData({ city: selectedOption }));
+    } else {
+      const selectedCity = cityOptions.find(
+        (state) => state.label === selectedOption
+      );
+      setCity(selectedCity);
+      dispatch(setFormData({ city: selectedOption }));
+    }
+  };
+
+  const handleSelectAddress = (newAddress) => {
+    setAddress(newAddress);
+    geocodeByAddress(newAddress)
+      .then((results) => {
+        const addressComponents = results[0].address_components;
+
+        let street = "",
+          city = "",
+          state = "",
+          country = "",
+          postcode = "";
+
+        addressComponents.forEach((component) => {
+          const types = component.types;
+          if (types.includes("street_number") || types.includes("route")) {
+            street = street
+              ? `${street} ${component.long_name}`
+              : component.long_name;
+          }
+          if (
+            types.includes("locality") ||
+            types.includes("administrative_area_level_3")
+          ) {
+            city = component.long_name;
+          }
+          if (types.includes("administrative_area_level_1")) {
+            state = component.long_name;
+          }
+          if (types.includes("country")) {
+            country = component.long_name;
+          }
+          if (types.includes("postal_code")) {
+            postcode = component.long_name;
+          }
+        });
+
+        setAddress(newAddress);
+        handleCountryChange(country);
+        handleStateChange(state, country);
+        handleCityChange(city, country, state);
+        dispatch(
+          setFormData({
+            address: newAddress,
+            street,
+            postcode,
+          })
+        );
+      })
+      .catch((error) => console.error("Error", error));
+  };
+
   return (
     <>
-      <div className=" flex md:flex-row flex-col md:justify-between pt-6">
+      <div className="flex md:flex-row flex-col md:justify-between pt-6">
         <div className="lg:w-[65%] xl:w-[45%] w-full lg:pr-4">
           <h2 className="self-stretch text-[#2C363F] md:text-[26px] text-xl font-extrabold leading-[normal]">
             Trust Agent
@@ -59,10 +203,7 @@ const PropertyForm = () => {
             Please enter your property details
           </p>
           <div className="my-4">
-            <label
-              className="div {
-                 text-[color:var(--P,var(--P,#2C363F))]  text-sm font-semibold leading-[normal]} "
-            >
+            <label className="text-[#2C363F] text-sm font-semibold leading-[normal]">
               Property is For?
             </label>
             <div className="">
@@ -98,7 +239,7 @@ const PropertyForm = () => {
           </div>
 
           <div className="mb-4">
-            <label className="self-stretch text-black  text-sm font-semibold leading-[normal] mb-3 block">
+            <label className="self-stretch text-black text-sm font-semibold leading-[normal] mb-3 block">
               Property Address
             </label>
             <PlacesAutocomplete
@@ -115,7 +256,7 @@ const PropertyForm = () => {
                 <div>
                   <div className="flex w-full mt-3">
                     <div className="[background:var(--P,#2C363F)] rounded-[4px_0px_0px_4px] flex justify-center w-[72px] items-center">
-                      {locationsvg}{" "}
+                      {locationsvg}
                     </div>
                     <input
                       {...getInputProps({
@@ -152,102 +293,117 @@ const PropertyForm = () => {
               )}
             </PlacesAutocomplete>
           </div>
-          <div className="flex justify-between my-2">
-            <label className="self-stretch text-black  text-sm font-semibold leading-[normal] mb-3 block">
+          <div
+            className="flex justify-between my-2 mb-6"
+            onClick={handleOpenAddress}
+          >
+            <label className="self-stretch text-black  text-sm font-semibold leading-[normal]  block">
               Add Manually
             </label>
-            <span onClick={handleOpenAddress}>{MoreVert} </span>
+            <span className={`${showAddressForm ? "down_icon" : "upicon"} `}>
+              {MoreVert}
+            </span>
           </div>
-          <div className="border-b-2 mb-3 ">
-            <div className="grid md:grid-cols-2 gap-4 mb-4">
-              <div>
-                <label className="self-stretch text-black  text-sm font-semibold leading-[normal] mb-3 block">
-                  Street
-                </label>
-                <input
-                  type="text"
-                  className="form-input px-2 block w-full h-[50px] shrink-0 rounded border [background:var(--Primary-Base-White,#FFF)#E4E3E4"
-                  placeholder="e.g. Street 123"
-                  value={formData.street}
-                  onChange={(e) =>
-                    dispatch(setFormData({ street: e.target.value }))
-                  }
-                />
+          {showAddressForm && (
+            <div className="border-b-2 mb-3">
+              <div className="grid md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="self-stretch text-black text-sm font-semibold leading-[normal] mb-3 block">
+                    Street
+                  </label>
+                  <input
+                    type="text"
+                    className="form-input px-2 block w-full h-[50px] shrink-0 rounded border [background:var(--Primary-Base-White,#FFF)#E4E3E4"
+                    placeholder="e.g. Street 123"
+                    value={formData.street}
+                    onChange={(e) =>
+                      dispatch(setFormData({ street: e.target.value }))
+                    }
+                  />
+                </div>
+                {console.log("country", country)}
+                <div>
+                  <label className="self-stretch text-black text-sm font-semibold leading-[normal] mb-3 block">
+                    Country
+                  </label>
+                  <Select
+                    options={countryOptions}
+                    className="w-full react_select form-input shrink-0 rounded [background:var(--Primary-Base-White,#FFF)#E4E3E4"
+                    value={
+                      countryOptions &&
+                      countryOptions.find(
+                        (option) => option.value === country?.value
+                      )
+                    }
+                    onChange={(opt) => handleCountryChange(opt?.label)}
+                  />
+                </div>
               </div>
-              <div>
-                <label className="self-stretch text-black  text-sm font-semibold leading-[normal] mb-3 block">
-                  State
-                </label>
-                <Select
-                  options={[]}
-                  className="w-full react_select form-input   shrink-0 rounded  [background:var(--Primary-Base-White,#FFF)#E4E3E4"
-                  value={formData.state}
-                  onChange={(option) =>
-                    dispatch(setFormData({ state: option }))
-                  }
-                />
-              </div>
-            </div>
 
-            <div className="grid md:grid-cols-2 gap-4 mb-4">
-              <div>
-                <label className="self-stretch text-black  text-sm font-semibold leading-[normal] mb-3 block">
-                  Country
-                </label>
-                <Select
-                  options={[]}
-                  className="w-full react_select form-input   shrink-0 rounded  [background:var(--Primary-Base-White,#FFF)#E4E3E4"
-                  value={formData.country}
-                  onChange={(option) =>
-                    dispatch(setFormData({ country: option }))
-                  }
-                />
+              <div className="grid md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="self-stretch text-black text-sm font-semibold leading-[normal] mb-3 block">
+                    State
+                  </label>
+                  <Select
+                    options={stateOptions}
+                    className="w-full react_select form-input shrink-0 rounded [background:var(--Primary-Base-White,#FFF)#E4E3E4"
+                    value={stateOptions.find(
+                      (option) => option.value === state?.value
+                    )}
+                    onChange={(opt) => handleStateChange(opt?.label)}
+                  />
+                </div>
+                <div>
+                  <label className="self-stretch text-black text-sm font-semibold leading-[normal] mb-3 block">
+                    City
+                  </label>
+                  <Select
+                    options={cityOptions}
+                    className="w-full react_select form-input shrink-0 rounded [background:var(--Primary-Base-White,#FFF)#E4E3E4"
+                    value={cityOptions.find(
+                      (option) => option.value === city?.value
+                    )}
+                    onChange={(opt) => handleCityChange(opt?.label)}
+                  />
+                </div>
               </div>
-              <div>
-                <label className="self-stretch text-black  text-sm font-semibold leading-[normal] mb-3 block">
-                  Postcode
-                </label>
-                <input
-                  type="text"
-                  className="form-input px-2 block w-full h-[50px] shrink-0 rounded border [background:var(--Primary-Base-White,#FFF)#E4E3E4"
-                  placeholder="e.g. 49968"
-                  value={formData.postcode}
-                  onChange={(e) =>
-                    dispatch(setFormData({ postcode: e.target.value }))
-                  }
-                />
+              <div className="grid md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="self-stretch text-black text-sm font-semibold leading-[normal] mb-3 block">
+                    Postcode
+                  </label>
+                  <input
+                    type="text"
+                    className="form-input px-2 block w-full h-[50px] shrink-0 rounded border [background:var(--Primary-Base-White,#FFF)#E4E3E4"
+                    placeholder="e.g. 49968"
+                    value={formData.postcode}
+                    onChange={(e) =>
+                      dispatch(setFormData({ postcode: e.target.value }))
+                    }
+                  />
+                </div>
               </div>
             </div>
-            <div className="grid md:grid-cols-2 gap-4 mb-4">
-              <div>
-                <label className="self-stretch text-black  text-sm font-semibold leading-[normal] mb-3 block">
-                  City
-                </label>
-                <Select
-                  options={[]}
-                  className="w-full react_select form-input   shrink-0 rounded  [background:var(--Primary-Base-White,#FFF)#E4E3E4"
-                  value={formData.city}
-                  onChange={(option) => dispatch(setFormData({ city: option }))}
-                />
-              </div>
-            </div>
-          </div>
+          )}
           <div className="grid md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label className="self-stretch text-black  text-sm font-semibold leading-[normal] mb-3 block">
+              <label className="self-stretch text-black text-sm font-semibold leading-[normal] mb-3 block">
                 Property Type
               </label>
               <Select
-                options={options}
+                options={propertyOptions}
                 className="w-full react_select"
-                value={formData.propertyType}
+                value={propertyOptions.find(
+                  (option) => option.value === formData.propertyType.value
+                )}
                 onChange={(option) =>
                   dispatch(setFormData({ propertyType: option }))
                 }
               />
             </div>
             <div>
-              <label className="self-stretch text-black  text-sm font-semibold leading-[normal] mb-3 block">
+              <label className="self-stretch text-black text-sm font-semibold leading-[normal] mb-3 block">
                 Is it a Strata Property?
               </label>
               <Select
@@ -262,7 +418,7 @@ const PropertyForm = () => {
           </div>
           <div className="grid md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label className="self-stretch text-black  text-sm font-semibold leading-[normal] mb-3 block">
+              <label className="self-stretch text-black text-sm font-semibold leading-[normal] mb-3 block">
                 Bedrooms
               </label>
               <Select
@@ -275,7 +431,7 @@ const PropertyForm = () => {
               />
             </div>
             <div>
-              <label className="self-stretch text-black  text-sm font-semibold leading-[normal] mb-3 block">
+              <label className="self-stretch text-black text-sm font-semibold leading-[normal] mb-3 block">
                 Bathrooms
               </label>
               <Select
@@ -291,10 +447,9 @@ const PropertyForm = () => {
 
           <div className="grid md:grid-cols-4 grid-cols-2 gap-4 mb-4 items-end">
             <div>
-              <label className="self-stretch text-black  text-sm font-semibold leading-[normal] mb-3 block">
+              <label className="self-stretch text-black text-sm font-semibold leading-[normal] mb-3 block">
                 Property Size
               </label>
-
               <Select
                 options={[]}
                 className="w-full react_select"
@@ -317,7 +472,7 @@ const PropertyForm = () => {
               />
             </div>
             <div>
-              <label className="self-stretch text-black  text-sm font-semibold leading-[normal] mb-3 block">
+              <label className="self-stretch text-black text-sm font-semibold leading-[normal] mb-3 block">
                 Land Size
               </label>
               <Select
@@ -345,7 +500,7 @@ const PropertyForm = () => {
 
           <div className="grid md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label className="self-stretch text-black  text-sm font-semibold leading-[normal] mb-3 block">
+              <label className="self-stretch text-black text-sm font-semibold leading-[normal] mb-3 block">
                 No of Living Rooms
               </label>
               <Select
@@ -359,7 +514,7 @@ const PropertyForm = () => {
               />
             </div>
             <div>
-              <label className="self-stretch text-black  text-sm font-semibold leading-[normal] mb-3 block">
+              <label className="self-stretch text-black text-sm font-semibold leading-[normal] mb-3 block">
                 Car Parking
               </label>
               <Select
@@ -375,11 +530,11 @@ const PropertyForm = () => {
           </div>
 
           <div className="mb-4">
-            <label className="self-stretch text-black  text-sm font-semibold leading-[normal] mb-3 block">
+            <label className="self-stretch text-black text-sm font-semibold leading-[normal] mb-3 block">
               Additional Info
             </label>
             <textarea
-              className="form-input p-2 block w-full  shrink-0 rounded border [background:var(--Primary-Base-White,#FFF)#E4E3E4"
+              className="form-input p-2 block w-full shrink-0 rounded border [background:var(--Primary-Base-White,#FFF)#E4E3E4"
               placeholder="Anything you might want to let the agent know about in advance..."
               rows={6}
               value={formData.additionalInfo}
@@ -391,7 +546,7 @@ const PropertyForm = () => {
         </div>
 
         <div className="md:my-0 my-2 max-w-sm w-full rounded border border-theme_color bg-light_theme border-solid h-1/2">
-          <h3 className=" h-[90px] shrink-0 [background:var(--P,#2C363F)] rounded-[4px_4px_0px_0px] text-[color:var(--Primary-Base-White,#FFF)]  text-xl font-semibold flex justify-center  items-center  uppercase">
+          <h3 className="h-[90px] shrink-0 [background:var(--P,#2C363F)] rounded-[4px_4px_0px_0px] text-[color:var(--Primary-Base-White,#FFF)] text-xl font-semibold flex justify-center items-center uppercase">
             WHY WE NEED VERIFICATION?
           </h3>
           <ul className="custom-list p-6">

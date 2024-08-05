@@ -17,6 +17,7 @@ module.exports = {
         steel_blue: "var(--steel-blue)",
         soft_gold: "var(--soft-gold)",
         spale_sunshine: "var(--pale-sunshine)",
+        light_yellow: "var(--light-yellow)",
       },
     },
   },

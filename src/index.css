@@ -1,6 +1,47 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  /* display: none; */
+}
+.body{
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: rgba(210, 210, 210, 0);
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background-color: rgba(210, 210, 210, 1);
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+.overflow_cro{
+  overflow: auto !important;
+}
+
+.overflow-auto::-webkit-scrollbar-thumb {
+  transition: opacity 0.3s;
+}
+
+.overflow-auto:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(210, 210, 210, 1);
+}
+.overflow_cro::-webkit-scrollbar-thumb {
+  transition: opacity 0.3s;
+}
+
+.overflow_cro:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(210, 210, 210, 1);
+}
 :root {
   --theme-color: #ffbf00;
   --light-theme: #fff9e5;
@@ -8,6 +49,7 @@
   --steel-blue: rgba(67, 82, 96, 1);
   --soft-gold: rgba(255, 191, 0, 0.2);
   --pale-sunshine: rgba(255, 191, 0, 1);
+  --light-yellow: rgba(244, 219, 80, 1);
 }
 body {
   font-family: "Plus Jakarta Sans", sans-serif;

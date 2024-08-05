@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setPage } from "../../redux/formSlice";
 import Tutorial from "./pages/Tutorial";
 import PropertyForm from "./pages/RentForm";
+import SellForm from "./pages/SellForm";
 
 const OnBoardPage = () => {
   const dispatch = useDispatch();
@@ -57,6 +58,7 @@ const OnBoardPage = () => {
         <div className="text-right text-sm font-medium mt-4">
           {getProgressWidth()} Completed
         </div>
+        <p className="font-[800] text-[26px] text-[#2C363F]">Trust Agent</p>
       </div>
       {renderPage()}
       <div className="py-4 px-8 flex justify-end gap-10 items-center">

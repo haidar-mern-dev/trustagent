@@ -1,5 +1,5 @@
 import React from "react";
-import { SaveMoney } from "../../../assets/svgs";
+import Svgs from "../../../assets/svgs";
 import Timage from "../../../assets/images/tutorial.png";
 
 const Tutorial = () => {
@@ -8,27 +8,27 @@ const Tutorial = () => {
       <div className="lg:w-[50%] w-full lg:pr-4 md:mt-0 mt-5">
         <div className="space-y-2 bg">
           <div className="flex items-center md:w-[528px] w-full p-2 space-x-3 shrink-0 rounded bg-white shadow-[0px_2px_16px_0px_rgba(0,0,0,0.06)]">
-            <div className="bg-theme_color p-3 ">{SaveMoney}</div>
+            <div className="bg-theme_color p-3 "><Svgs.SaveMoney/></div>
             <span className="text-base font-bold ">
               Get competitive quotes to sell or lease your property.
             </span>
           </div>
           <div className="flex items-center md:w-[528px] w-full p-2 space-x-3 shrink-0 rounded bg-white shadow-[0px_2px_16px_0px_rgba(0,0,0,0.06)]">
-            <div className="bg-theme_color p-3 ">{SaveMoney}</div>
+            <div className="bg-theme_color p-3 "><Svgs.SaveMoney/></div>
             <span className="text-base font-bold "> No agent hassles.</span>
           </div>
           <div className="flex items-center md:w-[528px] w-full p-2 space-x-3 shrink-0 rounded bg-white shadow-[0px_2px_16px_0px_rgba(0,0,0,0.06)]">
-            <div className="bg-theme_color p-3 ">{SaveMoney}</div>
+            <div className="bg-theme_color p-3 "><Svgs.SaveMoney/></div>
             <span className="text-base font-bold ">No fees.</span>
           </div>
           <div className="flex items-center md:w-[528px] w-full p-2 space-x-3 shrink-0 rounded bg-white shadow-[0px_2px_16px_0px_rgba(0,0,0,0.06)]">
-            <div className="bg-theme_color p-3 ">{SaveMoney}</div>
+            <div className="bg-theme_color p-3 "><Svgs.SaveMoney/></div>
             <span className="text-base font-bold ">
               It's as easy as 1, 2, 3.
             </span>
           </div>
           <div className="flex items-center md:w-[528px] w-full p-2 space-x-3 shrink-0 rounded bg-white shadow-[0px_2px_16px_0px_rgba(0,0,0,0.06)]">
-            <div className="bg-theme_color p-3 ">{SaveMoney}</div>
+            <div className="bg-theme_color p-3 "><Svgs.SaveMoney/></div>
             <span className="text-base font-bold ">Return anytime.</span>
           </div>
         </div>

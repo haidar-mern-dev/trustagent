@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import OtpInput from "react-otp-input";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const OtpForm = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const state = location.state;
   const [otp, setOtp] = useState("");
   console.log("Form submitted:", state);
 
-  const onSubmit = (data) => {
-    console.log("Form submitted:", state?.email);
+  const onSubmit = () => {
+    navigate("/onboard");
   };
 
   return (
@@ -44,7 +45,10 @@ const OtpForm = () => {
               height: "50px",
             }}
           />
-          <button className="w-full py-4 mt-5 bg-theme_color text-white rounded-lg font-semibold">
+          <button
+            className="w-full py-4 mt-5 bg-theme_color text-white rounded-lg font-semibold"
+            onClick={onSubmit}
+          >
             SEND
           </button>
         </div>

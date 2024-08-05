@@ -5,9 +5,8 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
-import { locationsvg, MoreVert } from "../../../assets/svgs";
 import { setFormData } from "../../../redux/formSlice"; // Adjust the import path according to your project structure
-import { Country, State, City } from "country-state-city";
+import Svgs from "../../../assets/svgs";
 
 const propertyOptions = [
   { value: "house", label: "House" },
@@ -191,11 +190,8 @@ const PropertyForm = () => {
 
   return (
     <>
-      <div className="flex md:flex-row flex-col md:justify-between pt-6">
+      <div className=" flex md:flex-row flex-col md:justify-between pt-12">
         <div className="lg:w-[65%] xl:w-[45%] w-full lg:pr-4">
-          <h2 className="self-stretch text-[#2C363F] md:text-[26px] text-xl font-extrabold leading-[normal]">
-            Trust Agent
-          </h2>
           <h2 className="self-stretch text-[#2C363F] md:text-[28px] text-xl font-extrabold leading-[normal]">
             Add Property Details
           </h2>
@@ -256,7 +252,7 @@ const PropertyForm = () => {
                 <div>
                   <div className="flex w-full mt-3">
                     <div className="[background:var(--P,#2C363F)] rounded-[4px_0px_0px_4px] flex justify-center w-[72px] items-center">
-                      {locationsvg}
+                     <Svgs.locationsvg/>
                     </div>
                     <input
                       {...getInputProps({
@@ -294,15 +290,13 @@ const PropertyForm = () => {
             </PlacesAutocomplete>
           </div>
           <div
-            className="flex justify-between my-2 mb-6"
+            className="flex justify-between my-2 mb-6 pointer"
             onClick={handleOpenAddress}
           >
             <label className="self-stretch text-black  text-sm font-semibold leading-[normal]  block">
               Add Manually
             </label>
-            <span className={`${showAddressForm ? "down_icon" : "upicon"} `}>
-              {MoreVert}
-            </span>
+            <span onClick={handleOpenAddress}><Svgs.MoreVert/></span>
           </div>
           {showAddressForm && (
             <div className="border-b-2 mb-3">

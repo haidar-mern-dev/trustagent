@@ -5,8 +5,8 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
-import { locationsvg, MoreVert } from "../../../assets/svgs";
 import { setFormData } from "../../../redux/formSlice"; // Adjust the import path according to your project structure
+import Svgs from "../../../assets/svgs";
 
 const options = [
   { value: "house", label: "House" },
@@ -112,7 +112,7 @@ const PropertyForm = () => {
                 <div>
                   <div className="flex w-full mt-3">
                     <div className="[background:var(--P,#2C363F)] rounded-[4px_0px_0px_4px] flex justify-center w-[72px] items-center">
-                      {locationsvg}{" "}
+                     <Svgs.locationsvg/>
                     </div>
                     <input
                       {...getInputProps({
@@ -153,7 +153,7 @@ const PropertyForm = () => {
             <label className="self-stretch text-black  text-sm font-semibold leading-[normal] mb-3 block">
               Add Manually
             </label>
-            <span onClick={handleOpenAddress}>{MoreVert} </span>
+            <span onClick={handleOpenAddress}><Svgs.MoreVert/></span>
           </div>
           <div className="border-b-2 mb-3 ">
             <div className="grid md:grid-cols-2 gap-4 mb-4">

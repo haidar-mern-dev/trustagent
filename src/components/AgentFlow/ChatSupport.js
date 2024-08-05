@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../layout";
-import { Attachment, SendIcon } from "../../assets/svgs";
+import Svgs from "../../assets/svgs";
 
 const ChatSupport = () => {
   return (
@@ -56,14 +56,14 @@ const ChatSupport = () => {
           </div>
           <div className="flex items-center px-2 w-full bg-[#F8F9FA] h-10">
             <div className="flex w-full h-full items-center gap-4">
-              {Attachment}
+              <Svgs.Attachment/>
               <input
                 type="text"
                 placeholder="Type here"
                 className="w-full h-full focus:outline-none bg-[#F8F9FA]"
               ></input>
             </div>
-            {SendIcon}
+            <Svgs.SendIcon/>
           </div>
         </div>
       </div>

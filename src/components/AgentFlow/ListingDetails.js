@@ -1,7 +1,7 @@
 import React from "react";
 import GoogleMap from "../shared/GoogleMap";
-import { Verified } from "../../assets/svgs";
 import Layout from "../layout";
+import Svgs from "../../assets/svgs";
 
 const detailsData = [
   { text: "Property is For?", detail: "For Sale" },
@@ -63,7 +63,7 @@ const ListingDetails = () => {
             Property Ownership
           </p>
           <div className="flex gap-3 justify-start items-center">
-            <span>{Verified}</span>
+            <span><Svgs.Verified/></span>
             <p className="font-sans font-semibold text-[14px] text-[#2C363F]">
               Ownership is Verified.
             </p>

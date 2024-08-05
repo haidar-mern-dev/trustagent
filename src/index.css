@@ -41,6 +41,16 @@ body {
 .react_select svg {
   fill: var(--theme-color);
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 
 .react_select input {
   height: 37px;
@@ -52,4 +62,30 @@ body {
 .upicon {
   transform: rotate(360deg);
   transition: transform 0.3s ease;
+}
+
+
+.faq-collapse .ant-collapse-item {
+  border: 1px solid #ddd !important;
+  border-radius: 4px !important;
+  margin-bottom: 20px !important;
+  background-color: #FAFAFA !important;
+}
+.ant-collapse-item {
+  background-color: #FAFAFA !important;
+}
+.faq-collapse.ant-collapse {
+  border: none !important;
+  background-color: initial !important;
+}
+.faq-collapse .ant-collapse-header {
+  height: 53px !important;
+}
+.faq-collapse .ant-collapse-header-text {
+  font-family: Plus Jakarta Sans;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2C363F;
+  text-align: left;
+  
 }

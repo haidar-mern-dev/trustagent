@@ -6,7 +6,7 @@ import Svgs from '../../assets/svgs';
 
 const navLinks = [
   { to: "/dashboard", icon: <Svgs.DashboardIcon />, label: "Dashboard" },
-  { to: "/my-property", icon: <Svgs.PropertyIcon />, label: "My Property" },
+  { to: "/listing-details", icon: <Svgs.PropertyIcon />, label: "My Property" },
   { to: "/bidding", icon: <Svgs.BiddingIcon />, label: "Bidding" },
   { to: "/help", icon: <Svgs.HelpIcon />, label: "Help" },
   { to: "/account-management", icon: <Svgs.SettingIcon />, label: "Account Management" },
@@ -66,7 +66,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       {/* <!-- SIDEBAR HEADER --> */}
       <div className="flex items-center text-white font-bold justify-between gap-2 px-6 py-5 lg:py-4">
         <NavLink to="/">
-          {/* <img src={Logo} alt="Logo" /> */}
           Logo
         </NavLink>
 

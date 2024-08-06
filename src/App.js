@@ -13,6 +13,11 @@ import FAQS from "./components/AgentFlow/FAQS";
 import AgentProfile from "./components/AgentFlow/AgentProfile";
 import AgencyProfile from "./components/AgentFlow/AgencyProfile";
 
+import BiddingPage from "./pages/bidding";
+import ProposalDetailCard from "../src/components/bidding/ProposalDetails";
+import AgentProfilePage from './pages/agentProfile/AgentProfile'
+import AgentDetail from "./pages/proposalDetail";
+import HeplPage from "./pages/help";
 function App() {
   return (
     <Router>
@@ -29,6 +34,10 @@ function App() {
         <Route path="/faq" element={<FAQS />} />
         <Route path="/agent-profile" element={<AgentProfile />} />
         <Route path="/agency-profile" element={<AgencyProfile />} />
+        <Route path="/help-chat" element={<HeplPage />} />
+        <Route path="/bidding-details" element={<BiddingPage />} />
+        <Route path="/bidding-details/:id" element={<AgentDetail />} />
+        <Route path="/agent-profile" element={<AgentProfilePage />} />
       </Routes>
     </Router>
   );

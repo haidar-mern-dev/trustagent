@@ -4,7 +4,6 @@ import Svgs from "../../assets/svgs";
 
 const ChatSupport = () => {
   return (
-    <Layout>
       <div className="w-full h-[45rem] bg-white rounded-[4px] flex">
         <div className="w-[34.8%] h-full flex flex-col gap-6">
           <p className="font-sans font-medium text-base text-[#202020] px-4 pt-4">
@@ -67,7 +66,6 @@ const ChatSupport = () => {
           </div>
         </div>
       </div>
-    </Layout>
   );
 };
 

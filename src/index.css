@@ -46,6 +46,8 @@ body::-webkit-scrollbar-thumb {
   --theme-color: #ffbf00;
   --light-theme: #fff9e5;
   --custom-gray: rgba(44, 54, 63, 1);
+  --custom-light-gray: rgba(244, 244, 244, 1);
+  --custom-dark-gray: rgba(140, 140, 140, 1);
   --steel-blue: rgba(67, 82, 96, 1);
   --soft-gold: rgba(255, 191, 0, 0.2);
   --pale-sunshine: rgba(255, 191, 0, 1);

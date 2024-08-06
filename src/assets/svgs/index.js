@@ -171,6 +171,24 @@ const Verified = ()=>{
   />
 </svg>
  };
+ const AddProperty = ()=>{
+  return   <svg width="48" height="44" viewBox="0 0 48 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0.5" y="0.5" width="47" height="43" rx="3.5" fill="white" stroke="#D4D4D4"/>
+  <path d="M24 13C26.755 13 29.455 13.232 32.083 13.678C32.616 13.768 33 14.234 33 14.774V15.818C33 16.1135 32.9418 16.4061 32.8287 16.679C32.7157 16.952 32.5499 17.2001 32.341 17.409L26.909 22.841C26.7001 23.0499 26.5343 23.298 26.4213 23.571C26.3082 23.8439 26.25 24.1365 26.25 24.432V27.359C26.2501 27.777 26.1337 28.1867 25.914 28.5423C25.6943 28.8978 25.3799 29.1851 25.006 29.372L21.75 31V24.432C21.75 24.1365 21.6918 23.8439 21.5787 23.571C21.4657 23.298 21.2999 23.0499 21.091 22.841L15.659 17.409C15.4501 17.2001 15.2843 16.952 15.1713 16.679C15.0582 16.4061 15 16.1135 15 15.818V14.774C15 14.234 15.384 13.768 15.917 13.678C18.5876 13.2259 21.2914 12.9991 24 13Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  
+ }
+ const RightArrow=()=>{ 
+  return    <svg className="rtl:rotate-180 block w-3 h-3 mx-1 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
+</svg>
+  
+ }
+ const ArrowDown=()=>{
+  return <svg width="22" height="13" viewBox="0 0 22 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M1 1L11 11L21 1" stroke="#FFBF00" stroke-width="2"/>
+  </svg>
+ }  
 
 export default{
   SaveMoney,
@@ -189,7 +207,10 @@ export default{
   ComparingBids,
   Verified,
   Attachment,
-  SendIcon
+  SendIcon,
+  AddProperty,
+  RightArrow,
+  ArrowDown,
 
 }
 

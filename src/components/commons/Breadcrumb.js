@@ -1,24 +1,30 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import Svgs from "../../assets/svgs";
 
 const Breadcrumb = ({ items }) => {
   return (
-    <div className="mb-6 flex flex-col gap-3 ">
-    <h2 className="text-title-md2 font-semibold text-black dark:text-white">
-      {items}
-    </h2>
-
-    <nav>
-      <ol className="flex items-center gap-2">
-        <li>
-          <Link className="font-medium" to="/">
-            Dashboard /
-          </Link>
-        </li>
-        <li className="font-medium text-primary">{items}</li>
+    <nav className="flex px-1 py-3 text-gray-700" aria-label="Breadcrumb">
+      <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+        {items.map((item, index) => (
+          <li key={index} className="inline-flex items-center">
+            {index > 0 && (
+              <div className="flex items-center">
+             <Svgs.RightArrow/>
+              </div>
+            )}
+            {item.url ? (
+              <a href={item.url} className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+                {item.label}
+              </a>
+            ) : (
+              <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
+                {item.label}
+              </span>
+            )}
+          </li>
+        ))}
       </ol>
     </nav>
-  </div>
   );
 };
 

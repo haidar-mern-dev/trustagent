@@ -8,7 +8,11 @@ import DashboardPage from "./pages/dashboard";
 import ListingDetails from "./components/AgentFlow/ListingDetails";
 import Bidding from "./components/AgentFlow/Bidding";
 import ChatSupport from "./components/AgentFlow/ChatSupport";
-
+import BiddingPage from "./pages/bidding";
+import ProposalDetailCard from "../src/components/bidding/ProposalDetails";
+import AgentProfilePage from './pages/agentProfile/AgentProfile'
+import AgentDetail from "./pages/proposalDetail";
+import HeplPage from "./pages/help";
 function App() {
   return (
     <Router>
@@ -20,7 +24,10 @@ function App() {
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/listing-details" element={<ListingDetails />} />
         <Route path="/bidding-submission" element={<Bidding />} />
-        <Route path="/help-chat" element={<ChatSupport />} />
+        <Route path="/help-chat" element={<HeplPage />} />
+        <Route path="/bidding-details" element={<BiddingPage />} />
+        <Route path="/bidding-details/:id" element={<AgentDetail />} />
+        <Route path="/agent-profile" element={<AgentProfilePage />} />
       </Routes>
     </Router>
   );

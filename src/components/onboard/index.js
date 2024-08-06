@@ -5,6 +5,7 @@ import { setPage } from "../../redux/formSlice";
 import Tutorial from "./pages/Tutorial";
 import PropertyForm from "./pages/RentForm";
 import SellForm from "./pages/SellForm";
+import Validate from "./pages/Validate";
 
 const OnBoardPage = () => {
   const dispatch = useDispatch();
@@ -25,9 +26,17 @@ const OnBoardPage = () => {
       case 2:
         return <PropertyForm />;
       case 3:
-        return <></>;
+        return (
+          <>
+            <SellForm />
+          </>
+        );
       case 4:
-        return <></>;
+        return (
+          <>
+            <Validate />
+          </>
+        );
       default:
         return <> </>;
     }
@@ -61,18 +70,18 @@ const OnBoardPage = () => {
         <p className="font-[800] text-[26px] text-[#2C363F]">Trust Agent</p>
       </div>
       {renderPage()}
-      <div className="py-4 px-8 flex justify-end gap-10 items-center">
+      <div className="py-12 px-8 flex justify-end gap-10 items-center">
         {page > 1 && (
           <button
             onClick={handleBack}
-            className="bg-theme_color text-white px-10 py-4 rounded"
+            className=" border border-theme_color text-black font-sans font-[700] text-base h-[44px] w-[196px] rounded"
           >
             Back
           </button>
         )}
         <button
           onClick={handleNext}
-          className="bg-theme_color text-white px-10 py-4 rounded"
+          className="bg-theme_color text-black font-sans font-[700] text-base h-[44px] w-[196px] rounded"
         >
           Next
         </button>

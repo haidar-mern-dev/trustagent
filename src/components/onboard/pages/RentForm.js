@@ -12,8 +12,12 @@ import { City, Country, State } from "country-state-city";
 const propertyOptions = [
   { value: "house", label: "House" },
   { value: "apartment", label: "Apartment" },
+  { value: "unit", label: "Unit" },
+  { value: "flat", label: "Flat" },
   { value: "townhouse", label: "Townhouse" },
-  // add more options as needed
+  { value: "duplex", label: "Duplex" },
+  { value: "land", label: "Land" },
+  { value: "rural", label: "Rural" },
 ];
 
 const PropertyForm = () => {
@@ -296,8 +300,8 @@ const PropertyForm = () => {
             <label className="self-stretch text-black  text-sm font-semibold leading-[normal]  block">
               Add Manually
             </label>
-            <span onClick={handleOpenAddress}>
-              <Svgs.MoreVert />
+            <span onClick={handleOpenAddress} className="cursor-pointer">
+              {showAddressForm === true ? <Svgs.MoreVert /> : <Svgs.down />}
             </span>
           </div>
           {showAddressForm && (
@@ -317,7 +321,6 @@ const PropertyForm = () => {
                     }
                   />
                 </div>
-                {console.log("country", country)}
                 <div>
                   <label className="self-stretch text-black text-sm font-semibold leading-[normal] mb-3 block">
                     Country
@@ -389,7 +392,7 @@ const PropertyForm = () => {
               </label>
               <Select
                 options={propertyOptions}
-                className="w-full react_select"
+                className="w-full react_select font-sans font-normal text-base text-[#717171]"
                 value={propertyOptions.find(
                   (option) => option.value === formData.propertyType.value
                 )}
@@ -404,7 +407,7 @@ const PropertyForm = () => {
               </label>
               <Select
                 options={[]}
-                className="w-full react_select"
+                className="w-full react_select font-sans font-normal text-base text-[#717171]"
                 value={formData.strataProperty}
                 onChange={(option) =>
                   dispatch(setFormData({ strataProperty: option }))
@@ -419,7 +422,7 @@ const PropertyForm = () => {
               </label>
               <Select
                 options={[]}
-                className="w-full react_select"
+                className="w-full react_select font-sans font-normal text-base text-[#717171]"
                 value={formData.bedrooms}
                 onChange={(option) =>
                   dispatch(setFormData({ bedrooms: option }))
@@ -432,7 +435,7 @@ const PropertyForm = () => {
               </label>
               <Select
                 options={[]}
-                className="w-full react_select"
+                className="w-full react_select font-sans font-normal text-base text-[#717171]"
                 value={formData.bathrooms}
                 onChange={(option) =>
                   dispatch(setFormData({ bathrooms: option }))
@@ -446,20 +449,20 @@ const PropertyForm = () => {
               <label className="self-stretch text-black text-sm font-semibold leading-[normal] mb-3 block">
                 Property Size
               </label>
-              <Select
-                options={[]}
-                className="w-full react_select"
-                placeholder={" Property Size"}
+              <input
+                type="text"
+                className="form-input px-2 block w-full h-[50px] shrink-0 rounded border [background:var(--Primary-Base-White,#FFF)#E4E3E4"
+                placeholder="e.g. 49968"
                 value={formData.propertySize}
-                onChange={(option) =>
-                  dispatch(setFormData({ propertySize: option }))
+                onChange={(e) =>
+                  dispatch(setFormData({ propertySize: e.target.value }))
                 }
               />
             </div>
             <div>
               <Select
                 options={[]}
-                className="w-full react_select"
+                className="w-full react_select font-sans font-normal text-base text-[#717171]"
                 placeholder={"sqm"}
                 value={formData.propertySizeUnit}
                 onChange={(option) =>
@@ -471,13 +474,13 @@ const PropertyForm = () => {
               <label className="self-stretch text-black text-sm font-semibold leading-[normal] mb-3 block">
                 Land Size
               </label>
-              <Select
-                options={[]}
-                placeholder={" Land Size"}
-                className="w-full react_select"
+              <input
+                type="text"
+                className="form-input px-2 block w-full h-[50px] shrink-0 rounded border [background:var(--Primary-Base-White,#FFF)#E4E3E4"
+                placeholder="e.g. 49968"
                 value={formData.landSize}
-                onChange={(option) =>
-                  dispatch(setFormData({ landSize: option }))
+                onChange={(e) =>
+                  dispatch(setFormData({ landSize: e.target.value }))
                 }
               />
             </div>
@@ -485,7 +488,7 @@ const PropertyForm = () => {
               <Select
                 placeholder={"sqm"}
                 options={[]}
-                className="w-full react_select"
+                className="w-full react_select font-sans font-normal text-base text-[#717171]"
                 value={formData.landSizeUnit}
                 onChange={(option) =>
                   dispatch(setFormData({ landSizeUnit: option }))
@@ -502,7 +505,7 @@ const PropertyForm = () => {
               <Select
                 options={[]}
                 placeholder={" e.g. 2"}
-                className="w-full react_select"
+                className="w-full react_select font-sans font-normal text-base text-[#717171]"
                 value={formData.livingRooms}
                 onChange={(option) =>
                   dispatch(setFormData({ livingRooms: option }))
@@ -516,7 +519,7 @@ const PropertyForm = () => {
               <Select
                 options={[]}
                 placeholder={" e.g. 2"}
-                className="w-full react_select"
+                className="w-full react_select font-sans font-normal text-base text-[#717171]"
                 value={formData.carParking}
                 onChange={(option) =>
                   dispatch(setFormData({ carParking: option }))

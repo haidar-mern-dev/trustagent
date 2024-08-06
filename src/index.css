@@ -133,3 +133,46 @@ input[type=number] {
   text-align: left;
   
 }
+input[type='radio'] {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  outline: none;
+  border: 1px solid #8C8C8C;
+}
+
+input[type='radio']:before {
+  content: '';
+  display: block;
+  width: 70%;
+  height: 70%;
+  margin: 18% auto;
+  border-radius: 50%;
+}
+input {
+  outline: none;
+}
+
+input[type="radio"]:checked:before {
+  background: rgb(255, 191, 0);
+  
+}
+
+input[type="radio"]:checked {
+border: 1px solid #FFBF00
+}
+
+.role {
+  margin-right: 80px;
+  margin-left: 20px;
+  font-weight: normal;
+}
+
+.checkbox label {
+  margin-bottom: 20px !important;
+}
+
+.roles {
+  margin-bottom: 40px;
+}

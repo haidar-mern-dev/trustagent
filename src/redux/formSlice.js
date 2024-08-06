@@ -19,6 +19,16 @@ const initialState = {
     livingRooms: "",
     carParking: "",
     additionalInfo: "",
+    saleType: "",
+    minPrice: "",
+    maxPrice: "",
+    startDate: "",
+    endDate: "",
+    endTime: "",
+    agreementType: "",
+    ownerName: "",
+    attachment: "",
+    passport: "",
   },
 };
 

@@ -6,7 +6,7 @@ import Svgs from '../../assets/svgs';
 
 const navLinks = [
   { to: "/dashboard", icon: <Svgs.DashboardIcon />, label: "Dashboard" },
-  { to: "/listing-details", icon: <Svgs.PropertyIcon />, label: "My Property" },
+  { to: "/property-details", icon: <Svgs.PropertyIcon />, label: "My Property" },
   { to: "/bidding-details", icon: <Svgs.BiddingIcon />, label: "Bidding" },
   { to: "/help-chat", icon: <Svgs.HelpIcon />, label: "Help" },
   { to: "/account-management", icon: <Svgs.SettingIcon />, label: "Account Management" },

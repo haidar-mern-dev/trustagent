@@ -32,6 +32,15 @@ body::-webkit-scrollbar-thumb {
   transition: opacity 0.3s;
 }
 
+.toggle-checkbox:checked {
+  right: 0;
+  border-color: #fbbf24;
+}
+
+.toggle-checkbox:checked + .toggle-label {
+  background-color: #fbbf24;
+}
+
 .overflow-auto:hover::-webkit-scrollbar-thumb {
   background-color: rgba(210, 210, 210, 1);
 }
@@ -52,6 +61,8 @@ body::-webkit-scrollbar-thumb {
   --soft-gold: rgba(255, 191, 0, 0.2);
   --pale-sunshine: rgba(255, 191, 0, 1);
   --light-yellow: rgba(244, 219, 80, 1);
+  --light-green: rgba(107, 232, 105, 1);
+  --customYellow: rgba(244, 219, 80, 1);
 }
 body {
   font-family: "Plus Jakarta Sans", sans-serif;

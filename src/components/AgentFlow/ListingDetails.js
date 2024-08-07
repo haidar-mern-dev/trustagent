@@ -1,6 +1,5 @@
 import React from "react";
 import GoogleMap from "../shared/GoogleMap";
-import Layout from "../layout";
 import Svgs from "../../assets/svgs";
 
 const detailsData = [
@@ -21,7 +20,7 @@ const detailsData = [
 
 const ListingDetails = () => {
   return (
-    <Layout>
+  
       <div className="flex flex-col gap-4">
         <div className="flex lg:flex-row flex-col w-full gap-4">
           <div className="flex-1 bg-white rounded-sm border border-[#E4E3E4] p-4">
@@ -70,7 +69,6 @@ const ListingDetails = () => {
           </div>
         </div>
       </div>
-    </Layout>
   );
 };
 

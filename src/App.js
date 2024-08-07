@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Signup from "./pages/signup";
 import Otp from "./pages/otp";
 import OnBoard from "./pages/onboard";
-import DashboardPage from "./pages/dashboard";
 import ListingDetails from "./components/AgentFlow/ListingDetails";
 import Bidding from "./components/AgentFlow/Bidding";
 import ChatSupport from "./components/AgentFlow/ChatSupport";
@@ -18,6 +17,9 @@ import ProposalDetailCard from "../src/components/bidding/ProposalDetails";
 import AgentProfilePage from './pages/agentProfile/AgentProfile'
 import AgentDetail from "./pages/proposalDetail";
 import HeplPage from "./pages/help";
+import DashboardPage from "./pages/dashboard/DashboardPage";
+import MyPropertyPage from "./pages/myproperty";
+import AccountManagement from "./pages/account";
 function App() {
   return (
     <Router>
@@ -27,7 +29,7 @@ function App() {
         <Route path="/otp" element={<Otp />} />
         <Route path="/onboard" element={<OnBoard />} />
         <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/listing-details" element={<ListingDetails />} />
+        <Route path="/property-details" element={<MyPropertyPage />} />
         <Route path="/bidding-submission" element={<Bidding />} />
         <Route path="/bidding-preview" element={<BiddingPreview />} />
         <Route path="/help-chat" element={<ChatSupport />} />
@@ -38,6 +40,7 @@ function App() {
         <Route path="/bidding-details" element={<BiddingPage />} />
         <Route path="/bidding-details/:id" element={<AgentDetail />} />
         <Route path="/agent-profile" element={<AgentProfilePage />} />
+        <Route path="/account-management" element={<AccountManagement />} />
       </Routes>
     </Router>
   );

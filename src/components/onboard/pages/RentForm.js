@@ -5,9 +5,9 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
-import { setFormData } from "../../../redux/formSlice"; // Adjust the import path according to your project structure
 import Svgs from "../../../assets/svgs";
 import { City, Country, State } from "country-state-city";
+import { setFormData } from "../../../redux/formSlice";
 
 const propertyOptions = [
   { value: "house", label: "House" },

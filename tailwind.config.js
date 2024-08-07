@@ -20,6 +20,8 @@ module.exports = {
         soft_gold: "var(--soft-gold)",
         spale_sunshine: "var(--pale-sunshine)",
         light_yellow: "var(--light-yellow)",
+        light_green: "var(--light-green)",
+        customYellow: "var(--customYellow)",
         customWhite: 'rgba(250, 250, 250, 1)',
       },
     },

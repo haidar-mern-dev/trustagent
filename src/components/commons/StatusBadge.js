@@ -7,11 +7,13 @@ const StatusBadge = ({ status }) => {
         Declined: 'bg-red-500 text-white',
         Validated: 'bg-green-500 text-white', 
         OnHold: 'bg-light_yellow text-white',   
+        Live: 'bg-light_green text-black rounded-3xl',   
+        GoLive: 'bg-customYellow text-black rounded-3xl',   
     };
 
     return (
         <span className={`py-1 px-3 rounded ${statusStyles[status]}`}>
-            {status}
+            {status=='GoLive'?'Go Live':status}
         </span>
     );
 };

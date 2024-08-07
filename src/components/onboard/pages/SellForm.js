@@ -38,12 +38,14 @@ const SellForm = () => {
   const clockIcon = <Svgs.clockIcon />;
 
   const agreementOptions = [
-    { value: "Exclusive", label: "Exclusive" },
-    { value: "Non-Exclusive", label: "Non-Exclusive" },
+    { value: "exclusive", label: "Exclusive" },
+    { value: "sole", label: "Sole" },
+    { value: "open", label: "Open" },
+    { value: "multiple", label: "Multiple" },
   ];
 
   return (
-    <div className="pt-12 flex md:flex-row flex-col md:justify-between">
+    <div className="pt-16 flex md:flex-row flex-col md:justify-between">
       <div className="flex flex-col gap-2">
         <p className="font-[800] text-[32px] text-[#2C363F]">HOW TO SELL</p>
         <p className="font-normal text-[14px] text-[#8C8C8C]">

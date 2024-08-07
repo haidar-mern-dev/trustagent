@@ -1,0 +1,14 @@
+.publish-modal .ant-modal-title {
+font-family: Plus Jakarta Sans;
+font-size: 26px;
+font-weight: 600;
+line-height: 28px;
+text-align: center;
+color: #2C363F;
+
+}
+.publish-modal .ant-modal-body {
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: 30px;
+}

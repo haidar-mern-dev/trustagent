@@ -19,6 +19,27 @@ const propertyOptions = [
   { value: "land", label: "Land" },
   { value: "rural", label: "Rural" },
 ];
+const satrataOptions = [
+  { value: "yes", label: "Yes" },
+  { value: "no", label: "No" },
+];
+
+const BedBathOptions = [
+  { value: "1", label: "1" },
+  { value: "2", label: "2" },
+  { value: "3", label: "3" },
+  { value: "4", label: "4" },
+  { value: "5", label: "5" },
+  { value: "6", label: "6" },
+  { value: "7", label: "7" },
+  { value: "8", label: "8" },
+  { value: "9", label: "9" },
+  { value: "10", label: "10" },
+];
+const unitSize = [
+  { value: "sqm", label: "sqm" },
+  { value: "ft", label: "ft" },
+];
 
 const PropertyForm = () => {
   const dispatch = useDispatch();
@@ -67,7 +88,9 @@ const PropertyForm = () => {
   };
 
   const handleRadioChange = (e) => {
-    setPropertyFor(e.target.value);
+    const value = e.target.value;
+    setPropertyFor(value);
+    dispatch(setFormData({ propertyFor: value }));
   };
 
   const handleCountryChange = (selectedOption) => {
@@ -194,7 +217,7 @@ const PropertyForm = () => {
 
   return (
     <>
-      <div className=" flex md:flex-row flex-col md:justify-between pt-12">
+      <div className=" flex md:flex-row flex-col md:justify-between pt-16">
         <div className="lg:w-[65%] xl:w-[45%] w-full lg:pr-4">
           <h2 className="self-stretch text-[#2C363F] md:text-[28px] text-xl font-extrabold leading-[normal]">
             Add Property Details
@@ -212,10 +235,9 @@ const PropertyForm = () => {
                   <input
                     type="radio"
                     name="propertyFor"
-                    value="sale"
+                    value="For sale"
                     className="w-4 h-4 rounded-full cursor-pointer"
-                    style={{ accentColor: "green" }}
-                    checked={propertyFor === "sale"}
+                    checked={propertyFor === "For sale"}
                     onChange={handleRadioChange}
                   />
                   <span className="ml-2">Sale</span>
@@ -226,10 +248,9 @@ const PropertyForm = () => {
                   <input
                     type="radio"
                     name="propertyFor"
-                    value="rent"
+                    value="For rent"
                     className="w-4 h-4 rounded-full cursor-pointer"
-                    style={{ accentColor: "green" }}
-                    checked={propertyFor === "rent"}
+                    checked={propertyFor === "For rent"}
                     onChange={handleRadioChange}
                   />
                   <span className="ml-2">Rent</span>
@@ -406,7 +427,7 @@ const PropertyForm = () => {
                 Is it a Strata Property?
               </label>
               <Select
-                options={[]}
+                options={satrataOptions}
                 className="w-full react_select font-sans font-normal text-base text-[#717171]"
                 value={formData.strataProperty}
                 onChange={(option) =>
@@ -421,7 +442,7 @@ const PropertyForm = () => {
                 Bedrooms
               </label>
               <Select
-                options={[]}
+                options={BedBathOptions}
                 className="w-full react_select font-sans font-normal text-base text-[#717171]"
                 value={formData.bedrooms}
                 onChange={(option) =>
@@ -434,7 +455,7 @@ const PropertyForm = () => {
                 Bathrooms
               </label>
               <Select
-                options={[]}
+                options={BedBathOptions}
                 className="w-full react_select font-sans font-normal text-base text-[#717171]"
                 value={formData.bathrooms}
                 onChange={(option) =>
@@ -461,7 +482,7 @@ const PropertyForm = () => {
             </div>
             <div>
               <Select
-                options={[]}
+                options={unitSize}
                 className="w-full react_select font-sans font-normal text-base text-[#717171]"
                 placeholder={"sqm"}
                 value={formData.propertySizeUnit}
@@ -487,7 +508,7 @@ const PropertyForm = () => {
             <div>
               <Select
                 placeholder={"sqm"}
-                options={[]}
+                options={unitSize}
                 className="w-full react_select font-sans font-normal text-base text-[#717171]"
                 value={formData.landSizeUnit}
                 onChange={(option) =>
@@ -503,7 +524,7 @@ const PropertyForm = () => {
                 No of Living Rooms
               </label>
               <Select
-                options={[]}
+                options={BedBathOptions}
                 placeholder={" e.g. 2"}
                 className="w-full react_select font-sans font-normal text-base text-[#717171]"
                 value={formData.livingRooms}
@@ -517,7 +538,7 @@ const PropertyForm = () => {
                 Car Parking
               </label>
               <Select
-                options={[]}
+                options={BedBathOptions}
                 placeholder={" e.g. 2"}
                 className="w-full react_select font-sans font-normal text-base text-[#717171]"
                 value={formData.carParking}

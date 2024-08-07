@@ -28,7 +28,7 @@ const initialState = {
     agreementType: "",
     ownerName: "",
     attachment: "",
-    passport: "",
+    strataAttachment: "",
   },
 };
 

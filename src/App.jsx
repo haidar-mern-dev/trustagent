@@ -13,7 +13,7 @@ import AgentProfile from "./components/AgentFlow/AgentProfile";
 import AgencyProfile from "./components/AgentFlow/AgencyProfile";
 
 import BiddingPage from "./pages/bidding";
-import ProposalDetailCard from "../src/components/bidding/ProposalDetails";
+import ProposalDetailCard from "./components/bidding/ProposalDetails";
 import CustomerAgentProfilePage from './pages/customerProfile/AgentProfile'
 import AgentDetail from "./pages/proposalDetail";
 import HeplPage from "./pages/help";

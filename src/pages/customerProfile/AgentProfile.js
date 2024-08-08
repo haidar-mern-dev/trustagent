@@ -3,7 +3,7 @@ import AgentProfile from '../../components/bidding/AgentDetails'
 import Layout from '../../components/layout';
 import Breadcrumb from '../../components/commons/Breadcrumb';
 
-export default function AgentProfilePage() {
+export default function CustomerAgentProfilePage() {
   const breadcrumbItems = [
     { label: "Home", url: "/" },
     { label: "Shortlisted Agents", url: "/bidding-details" },

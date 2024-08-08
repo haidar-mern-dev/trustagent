@@ -9,6 +9,8 @@ const StatusBadge = ({ status }) => {
         OnHold: 'bg-light_yellow text-white',   
         Live: 'bg-light_green text-black rounded-3xl',   
         GoLive: 'bg-customYellow text-black rounded-3xl',   
+        Won: 'bg-green-500 text-white rounded',   
+        Lost: 'bg-red-500 text-white rounded',   
     };
 
     return (

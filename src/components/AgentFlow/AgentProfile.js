@@ -34,7 +34,6 @@ const validationSchema = Yup.object({
 
 const AgentProfile = () => {
   return (
-    <Layout>
       <div className="-ml-5 w-full flex flex-col gap-6">
         <p className="font-sans font-medium text-base text-[#202020]">
           Agent Profile
@@ -105,7 +104,6 @@ const AgentProfile = () => {
           </div>
         </div>
       </div>
-    </Layout>
   );
 };
 

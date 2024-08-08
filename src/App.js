@@ -14,12 +14,18 @@ import AgencyProfile from "./components/AgentFlow/AgencyProfile";
 
 import BiddingPage from "./pages/bidding";
 import ProposalDetailCard from "../src/components/bidding/ProposalDetails";
-import AgentProfilePage from './pages/agentProfile/AgentProfile'
+import CustomerAgentProfilePage from './pages/customerProfile/AgentProfile'
 import AgentDetail from "./pages/proposalDetail";
 import HeplPage from "./pages/help";
 import DashboardPage from "./pages/dashboard/DashboardPage";
 import MyPropertyPage from "./pages/myproperty";
 import AccountManagement from "./pages/account";
+import HelpPage from "./pages/help";
+import ProspectsPage from "./pages/dashboard/backupdesin";
+import ViewBidsPage from "./pages/viewBids";
+import AgencyProfilePage from "./pages/agencyProfile";
+import AgentProfilePage from "./pages/agentProfile";
+import AgentPasswordPage from "./pages/passwordPage";
 function App() {
   return (
     <Router>
@@ -32,15 +38,20 @@ function App() {
         <Route path="/property-details" element={<MyPropertyPage />} />
         <Route path="/bidding-submission" element={<Bidding />} />
         <Route path="/bidding-preview" element={<BiddingPreview />} />
-        <Route path="/help-chat" element={<ChatSupport />} />
+        <Route path="/help-chat" element={<HelpPage />} />
         <Route path="/faq" element={<FAQS />} />
         <Route path="/agent-profile" element={<AgentProfile />} />
         <Route path="/agency-profile" element={<AgencyProfile />} />
         <Route path="/help-chat" element={<HeplPage />} />
         <Route path="/bidding-details" element={<BiddingPage />} />
         <Route path="/bidding-details/:id" element={<AgentDetail />} />
-        <Route path="/agent-profile" element={<AgentProfilePage />} />
+        <Route path="/agent-profile" element={<CustomerAgentProfilePage />} />
         <Route path="/account-management" element={<AccountManagement />} />
+        <Route path="/prospects-details" element={<ProspectsPage />} />
+        <Route path="/view-bids" element={<ViewBidsPage />} />
+        <Route path="/account-management/agencyprofile" element={<AgencyProfilePage />} />
+        <Route path="/account-management/agentprofile" element={<AgentProfilePage />} />
+        <Route path="/account-management/security" element={<AgentPasswordPage />} />
       </Routes>
     </Router>
   );

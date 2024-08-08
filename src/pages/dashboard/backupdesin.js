@@ -8,7 +8,7 @@ import TypeBadge from "../../components/commons/TypeBadge";
 import Pagination from "../../components/commons/Pagination";
 import Breadcrumb from "../../components/commons/Breadcrumb";
 
-const BackupDesign = () => {
+const ProspectsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 5;
   const headers = [
@@ -83,11 +83,12 @@ const BackupDesign = () => {
     { count: "06", title: "Comparing Bids", icon: <Svgs.ComparingBids /> },
   ];
   const items = [
-    { label: "Listings", href: "/listings" },
-    { label: "Detail", href: "/listings/detail" },
+    { label: "Prospects"},
   ];
   return (
     <Layout>
+       <div className="font-semibold	tex-base">Prospects</div>
+       <Breadcrumb items={items} />  
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         {cardData.map((card, index) => (
           <PropertyCard
@@ -104,9 +105,17 @@ const BackupDesign = () => {
           <Table headers={headersBids} data={dataBids} />
         </div>
       </div>
-      <div className="flex flex-col items-end ml-4 mt-6">
-        <button className="bg-spale_sunshine text-custom_gray font-semibold	 py-2 px-4 rounded  ">
-          Add Property
+      
+      <div className="flex w-2/6 mt-3 relative ">
+        <div className="absolute left-3 top-3">
+          <Svgs.SearchIcon />
+        </div>
+        <input
+          placeholder="Search "
+          className="h-[45px] shrink-0 rounded border [background:var(--Primary-Base-White,#FFF)#E4E3E4 px-3 flex-grow outline-none pl-11"
+        />
+        <button className="ml-3">
+            <Svgs.FilterIcon />
         </button>
       </div>
       <div className="bg-white p-4 rounded mt-6">
@@ -123,4 +132,4 @@ const BackupDesign = () => {
   );
 };
 
-export default BackupDesign;
+export default ProspectsPage;

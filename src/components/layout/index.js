@@ -8,29 +8,26 @@ const DefaultLayout= ({ children }) => {
 
   return (
     <div className="bg-gray-100">
-      {/* <!-- ===== Page Wrapper Start ===== --> */}
+ 
       <div className="flex h-screen overflow-hidden">
-        {/* <!-- ===== Sidebar Start ===== --> */}
-        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        {/* <!-- ===== Sidebar End ===== --> */}
 
-        {/* <!-- ===== Content Area Start ===== --> */}
+        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} isCustomerView={false} />
+    
         <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
-          {/* <!-- ===== Header Start ===== --> */}
-          <HeaderComponent sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-          {/* <!-- ===== Header End ===== --> */}
 
-          {/* <!-- ===== Main Content Start ===== --> */}
+          <HeaderComponent sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+
           <main>
             <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
               {children}
             </div>
           </main>
-          {/* <!-- ===== Main Content End ===== --> */}
+          <div className='bg-white shadow-header-custom  w-full flex items-center justify-center p-4 mt-auto text-xs '>
+            2024 © TrustAgent
+          </div>
         </div>
-        {/* <!-- ===== Content Area End ===== --> */}
+        
       </div>
-      {/* <!-- ===== Page Wrapper End ===== --> */}
     </div>
   );
 };

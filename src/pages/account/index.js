@@ -3,6 +3,7 @@ import Layout from "../../components/layout/index";
 import UserProfile from "../../components/account/UserProfile";
 import PersonalDetailsForm from "../../components/account/PersonalDetailsForm";
 import Breadcrumb from "../../components/commons/Breadcrumb";
+import UpdatePasswordForm from "../../components/account/UpdatePasswordForm";
 const breadcrumbProfile = [
   { label: "Account Management", },
 ];
@@ -12,7 +13,7 @@ const breadcrumbUpdateProfile = [
 ];
 const breadcrumbUpdatePassword = [
   { label: "Account Management", url: "/account-management" },
-  { label: " "},
+  { label: " Update Password"},
 ];
 export default function AccountManagement() {
   const [view, setView] = useState(0);
@@ -24,6 +25,7 @@ export default function AccountManagement() {
       />
       {view == "0" && <UserProfile setView={setView} />}
       {view == "1" && <PersonalDetailsForm />}
+      {view == "2" && <UpdatePasswordForm />}
     </Layout>
   );
 }

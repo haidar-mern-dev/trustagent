@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "../../../redux/formSlice";
 import { DatePicker, TimePicker } from "antd";
 import Svgs from "../../../assets/svgs";
-import moment from "moment"; // Import moment
+import moment from "moment"; 
 import Select from "react-select";
 
 const SellForm = () => {

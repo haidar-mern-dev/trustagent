@@ -11,7 +11,7 @@ const DefaultLayout= ({ children }) => {
  
       <div className="flex h-screen overflow-hidden">
 
-        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} isCustomerView={false} />
+        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} isCustomerView={true} />
     
         <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
 

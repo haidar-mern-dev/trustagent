@@ -9,11 +9,8 @@ const navLinksCustomer = [
   { 
     to: "/account-management", 
     icon: <Svgs.SettingIcon />, 
-    label: "Account Management",
-    children: [
-      { to: "/account-management/profile", label: "Profile" },
-      { to: "/account-management/security", label: "Security" }
-    ]
+    label: "My Account",
+
   },
 ];
 
@@ -88,7 +85,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, isCustomerView }) => {
   return (
     <aside
       ref={sidebar}
-      className={`absolute left-0 top-0 z-40 flex h-screen w-72.5 flex-col overflow-y-hidden bg-custom_gray duration-300 ease-linear lg:static lg:translate-x-0 ${
+      className={`absolute left-0 top-0 z-40 flex h-screen w-72 flex-col overflow-y-hidden bg-custom_gray duration-300 ease-linear lg:static lg:translate-x-0 ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}
     >

@@ -2,17 +2,17 @@ import React from 'react';
 
 const UpdatePasswordForm = () => {
   return (
-    <div className='-ml-5 w-full flex flex-col gap-6'>
+    <div className='px-4 w-full flex flex-col gap-6'>
        <p className="font-sans font-medium text-base text-[#202020]">
           Password
         </p>
         <p className="font-sans font-normal text-[14px] text-[#202020] -mt-1">
           Password
         </p>
-      <div className=" md:w-[55%] w-[90%] h-auto rounded-[4px] border border-[#E4E3E4] bg-white flex md:items-start items-center justify-center py-5">
+      <div className=" md:w-[55%] w-full lg:w-[90%] h-auto rounded-[4px] border border-[#E4E3E4] bg-white flex md:items-start items-center justify-center py-5">
       <div className="p-4 w-full">
           <h2 className="text-lg font-semibold mb-4">Change Password</h2>
-          <div className="space-y-4 w-2/6 mb-4">
+          <div className="space-y-4 w-full lg:w-3/6 mb-4">
             <div>
               <label className="block text-sm font-medium text-gray-700">Current Password</label>
               <input

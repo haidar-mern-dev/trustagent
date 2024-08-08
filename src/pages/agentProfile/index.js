@@ -4,8 +4,8 @@ import AgentProfile from '../../components/AgentFlow/AgentProfile'
 
 export default function AgentProfilePage() {
   return (
-    <div>
+    <Layout>
         <AgentProfile/>
-    </div>
+    </Layout>
   )
 }

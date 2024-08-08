@@ -27,7 +27,7 @@ export default function MyPropertyPage() {
         </div>
       </div>
 
-      {view==1&& <ListingDetails />}
+      {view==1&& <ListingDetails is />}
      {view==2&& <EditProperty/>}
     </Layout>
   );

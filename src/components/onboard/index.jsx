@@ -9,10 +9,13 @@ import Review from "./pages/Review";
 import { Modal } from "antd";
 import "./onboard.css";
 import Svgs from "../../assets/svgs";
+import OnRentForm from "./pages/OnRentForm";
 
 const OnBoardPage = () => {
   const dispatch = useDispatch();
   const page = useSelector((state) => state.form.page);
+  const formData = useSelector((state) => state.form.formData);
+  console.log("sdfweftert", formData);
   const [publishModal, setPublishModal] = useState(false);
 
   const handleNext = () => {
@@ -38,7 +41,15 @@ const OnBoardPage = () => {
       case 2:
         return <PropertyForm />;
       case 3:
-        return <SellForm />;
+        return (
+          <>
+            {formData?.propertyFor === "For sale" ? (
+              <SellForm />
+            ) : (
+              <OnRentForm />
+            )}
+          </>
+        );
       case 4:
         return <Validate />;
       case 5:

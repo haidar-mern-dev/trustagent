@@ -1,10 +1,14 @@
+// src/components/SignupForm.js
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaCheck, FaCross } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
 import { IoMdEyeOff } from "react-icons/io";
 import { IoEye } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { signupUser } from "../../redux/authSlice";
+import { notification } from 'antd';
 import bg from "../../assets/images/bg.png";
 
 const SignupForm = () => {
@@ -19,20 +23,15 @@ const SignupForm = () => {
   const [type, setType] = useState(false);
   const password = watch("password", "");
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log("Form submitted:", errors);
-
-  const onSubmit = (data) => {
-    console.log("Form submitted:", data);
-    navigate("/otp", { state: data });
-  };
+  const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (password) trigger("password");
   }, [password, trigger]);
 
   const validatePassword = (value) => {
-    console.log("Password value:", value);
     let strength = "Weak";
     let isValid = value.length >= 8;
     if (isValid) {
@@ -45,15 +44,28 @@ const SignupForm = () => {
       isValid = false;
     }
     setPasswordStrength(strength);
-    console.log("Password strength:", strength);
     return isValid;
   };
 
+  const onSubmit = (data) => {
+    dispatch(signupUser(data)).then((result) => {
+      if (result.meta.requestStatus === 'fulfilled') {
+        notification.success({
+          message: 'Signup Successful',
+          description: 'You have successfully signed up.',
+        });
+        navigate("/otp", { state: data });
+      } else if (result.meta.requestStatus === 'rejected') {
+        notification.error({
+          message: 'Signup Failed',
+          description: result.payload || 'Signup failed due to unknown error.',
+        });
+      }
+    });
+  };
+
   return (
-    <div
-      className="min-h-screen flex md:flex-row flex-col md:justify-between justify-center items-center bg-white md:p-20 p-4
-    main_container bg-cover bg-center"
-    >
+    <div className="min-h-screen flex md:flex-row flex-col md:justify-between justify-center items-center bg-white md:p-20 p-4 main_container bg-cover bg-center">
       <div className="lg:w-[65%] xl:w-[35%] w-full lg:pr-4">
         <h2 className="self-stretch text-[#2C363F] md:text-[28px] text-xl font-extrabold leading-[normal]">
           Trust Agent
@@ -118,14 +130,13 @@ const SignupForm = () => {
                   }`}
                 >
                   <span>
-                    {" "}
                     {passwordStrength === "Weak" ||
                     passwordStrength === "Medium" ? (
                       <ImCross size={12} />
                     ) : (
                       <FaCheck size={12} />
                     )}
-                  </span>{" "}
+                  </span>
                   Password strength:{" "}
                   <span className="font-semibold"> {passwordStrength}</span>
                 </li>
@@ -135,7 +146,6 @@ const SignupForm = () => {
                   }`}
                 >
                   <span>
-                    {" "}
                     {password.length >= 8 ? (
                       <FaCheck size={12} />
                     ) : (
@@ -152,21 +162,20 @@ const SignupForm = () => {
                   }`}
                 >
                   <span>
-                    {" "}
                     {password.match(/[0-9]/) ||
                     password.match(/[^a-zA-Z0-9]/) ? (
                       <FaCheck size={12} />
                     ) : (
                       <ImCross size={12} />
                     )}
-                  </span>{" "}
+                  </span>
                   Contains a number or symbol
                 </li>
               </ul>
             </div>
           )}
-          <button className="w-full py-4 mt-3 bg-theme_color text-white rounded-lg font-semibold">
-            REGISTER
+          <button className="w-full py-4 mt-3 bg-theme_color text-white rounded-lg font-semibold" disabled={auth.loading}>
+            {auth.loading ? 'REGISTERING...' : 'REGISTER'}
           </button>
         </form>
         <div className="mt-4 text-center">

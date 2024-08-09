@@ -26,11 +26,13 @@ import ViewBidsPage from "./pages/viewBids";
 import AgencyProfilePage from "./pages/agencyProfile";
 import AgentProfilePage from "./pages/agentProfile";
 import AgentPasswordPage from "./pages/passwordPage";
+import SignIn from "./pages/signin";
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/signup" element={<Signup />} />
+        <Route path="/signin" element={<SignIn />} />
         <Route path="/" element={<Signup />} />
         <Route path="/otp" element={<Otp />} />
         <Route path="/onboard" element={<OnBoard />} />

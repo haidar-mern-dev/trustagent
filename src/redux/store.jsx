@@ -3,7 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "redux";
-
+import authReducer from "./authSlice";
 import formReducer from "./formSlice";
 import { thunk } from "redux-thunk";
 
@@ -14,6 +14,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   form: formReducer,
+  auth: authReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

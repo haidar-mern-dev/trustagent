@@ -30,6 +30,7 @@ const SignInForm = () => {
   const onSubmit = (data) => {
     dispatch(loginUser(data)).then((result) => {
       if (result.meta.requestStatus === 'fulfilled') {
+        localStorage.setItem("token", result.payload.token);
         notification.success({
           message: 'Login Successful',
           description: 'You have successfully logged in.',

@@ -1,16 +1,23 @@
-// src/api.js
 import config from './config';
 
 const apiBaseUrl = config.apiBaseUrl;
-
-const request = async (endpoint, method = 'GET', data = null) => {
+const token= localStorage.getItem("token");
+const request = async (endpoint, method = 'GET', data = null, authRequired = false) => {
   const url = `${apiBaseUrl}${endpoint}`;
+
   const options = {
     method,
     headers: {
       'Content-Type': 'application/json',
     },
   };
+
+  if (authRequired) {
+    if (token) {
+      options.headers['Authorization'] = `Bearer ${token}`;
+    }
+  }
+
   if (data) {
     options.body = JSON.stringify(data);
   }
@@ -33,5 +40,15 @@ export const login = async (email, password) => {
 };
 
 export const signup = async (name, email, password) => {
-  return await request('auth/signup', 'POST', { name, email, password,"role": "Agency" });
+  return await request('auth/signup', 'POST', { name, email, password, "role": "Agency" });
+};
+
+export const getUserProfile = async () => {
+  return await request('auth/profile', 'GET', null, true); 
+};
+export const updateUserProfile = async (data) => {
+  return await request('auth/updateProfile', 'PATCH',data, true); 
+};
+export const resetPassowrd = async (data) => {
+  return await request('auth/resetPassword', 'POST',data, true); 
 };

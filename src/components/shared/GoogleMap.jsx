@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import GoogleMapReact from "google-map-react";
 import location from "../../assets/images/Vector.png";
 import "../../components/styles.css";
@@ -7,31 +7,11 @@ const AnyReactComponent = ({ text }) => (
   <img src={location} className="h-[39px] w-[29px]" alt="Marker" />
 );
 
-const GoogleMap = () => {
-  const [userLocation, setUserLocation] = useState(null);
+const GoogleMap = ({ lat, lng }) => {
   const [mapType, setMapType] = useState("roadmap");
-  const getCurrentLocation = () => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setUserLocation({ lat: latitude, lng: longitude });
-        },
-        (error) => {
-          console.error("Error getting location:", error);
-        }
-      );
-    } else {
-      console.log("Geolocation is not available in this browser.");
-    }
-  };
-
-  useEffect(() => {
-    getCurrentLocation();
-  }, []);
 
   const defaultProps = {
-    center: userLocation,
+    center: { lat, lng },
     zoom: 13,
   };
 
@@ -59,24 +39,18 @@ const GoogleMap = () => {
           Satellite
         </button>
       </div>
-      {userLocation ? (
-        <GoogleMapReact
-          bootstrapURLKeys={{
-            key: "AIzaSyDqr4MWNhPG5sZnfMSEPc6GOJ8rdSMNVBA",
-          }}
-          defaultCenter={defaultProps.center}
-          defaultZoom={defaultProps.zoom}
-          options={{
-            mapTypeId: mapType, // Set map type
-          }}
-        >
-          <AnyReactComponent
-            lat={userLocation.lat}
-            lng={userLocation.lng}
-            text={location}
-          />
-        </GoogleMapReact>
-      ) : null}
+      <GoogleMapReact
+        bootstrapURLKeys={{
+          key: "YOUR_GOOGLE_MAPS_API_KEY",
+        }}
+        defaultCenter={defaultProps.center}
+        defaultZoom={defaultProps.zoom}
+        options={{
+          mapTypeId: mapType,
+        }}
+      >
+        <AnyReactComponent lat={lat} lng={lng} text={location} />
+      </GoogleMapReact>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import Svgs from '../../assets/svgs';
 
 const navLinksCustomer = [
-  { to: "/property-details", icon: <Svgs.PropertyIcon />, label: "My Property" },
+  // { to: "/property-details", icon: <Svgs.PropertyIcon />, label: "My Property" },
   { to: "/bidding-details", icon: <Svgs.BiddingIcon />, label: "Bidding" },
   { to: "/help-chat", icon: <Svgs.HelpIcon />, label: "Help" },
   { 

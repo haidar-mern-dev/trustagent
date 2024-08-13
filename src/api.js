@@ -52,3 +52,15 @@ export const updateUserProfile = async (data) => {
 export const resetPassowrd = async (data) => {
   return await request('auth/resetPassword', 'POST',data, true); 
 };
+export const getProperties = async () => {
+  return await request('property', 'GET',null, false); 
+};
+export const getPropertById = async (id) => {
+  return await request(`property/${id}`, 'GET',null, false); 
+};
+export const getBidsByProperty = async () => {
+  return await request(`property/bids`, 'GET',null, true); 
+};
+export const getPropertyCount = async () => {
+  return await request(`property/count`, 'GET',null, true); 
+};

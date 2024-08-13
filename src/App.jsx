@@ -37,7 +37,7 @@ function App() {
         <Route path="/otp" element={<Otp />} />
         <Route path="/onboard" element={<OnBoard />} />
         <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/property-details" element={<MyPropertyPage />} />
+        <Route path="/property-details/:id" element={<MyPropertyPage />} />
         <Route path="/bidding-submission" element={<Bidding />} />
         <Route path="/bidding-preview" element={<BiddingPreview />} />
         <Route path="/help-chat" element={<HelpPage />} />

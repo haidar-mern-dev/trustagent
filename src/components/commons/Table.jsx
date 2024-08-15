@@ -8,7 +8,7 @@ const Table = ({ headers, data, isDashboard = false }) => {
             <table className="min-w-full table-fixed">
                 <thead>
                     <tr>
-                        {headers.map((header, index) => (
+                        {headers?.map((header, index) => (
                             <th
                                 key={index}
                                 className={`py-3 px-6 ${isDashboard ? 'font-semibold text-lg' : 'font-medium text-xs'} tracking-wider text-gray-700 ${isDashboard ? '' : 'border-b border-gray-200'}`}
@@ -25,9 +25,9 @@ const Table = ({ headers, data, isDashboard = false }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((row, rowIndex) => (
+                    {data?.map((row, rowIndex) => (
                         <tr key={rowIndex} className={`${isDashboard ? '' : 'border-b border-gray-200'}`}>
-                            {row.map((cell, cellIndex) => (
+                            {row?.map((cell, cellIndex) => (
                                 <td
                                     key={cellIndex}
                                     className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap"

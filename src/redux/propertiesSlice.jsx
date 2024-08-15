@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getProperties, getPropertById, getBidsByProperty, getPropertyCount } from '../api';
+import { getProperties, getPropertById, getBidsByProperty, getPropertyCount, comparedBids } from '../api';
 
 // Fetch all properties
 export const fetchProperties = createAsyncThunk(
@@ -27,18 +27,20 @@ export const fetchPropertyById = createAsyncThunk(
   }
 );
 
-
+// Fetch bids by property ID
 export const fetchBidsByPropertyId = createAsyncThunk(
   'properties/fetchBidsByPropertyId',
-  async (_, { rejectWithValue }) => {
+  async (id, { rejectWithValue }) => {
     try {
-      const response = await getBidsByProperty();
+      const response = await getBidsByProperty(id);
       return response;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
+
+// Fetch property count
 export const fetchPropertyCount = createAsyncThunk(
   'properties/count',
   async (_, { rejectWithValue }) => {
@@ -51,15 +53,29 @@ export const fetchPropertyCount = createAsyncThunk(
   }
 );
 
+// Compare bids by property ID
+export const compareBidsById = createAsyncThunk(
+  'properties/compareBidsById',
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await comparedBids(id);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 const propertiesSlice = createSlice({
   name: 'properties',
   initialState: {
-    items: [], 
+    items: [],
     selectedProperty: null,
-    bids: [], 
-    propertyCount : 0, 
-    loading: false, 
-    error: null, 
+    bids: [],
+    comparedBids: null,
+    propertyCount: 0,
+    loading: false,
+    error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -71,7 +87,7 @@ const propertiesSlice = createSlice({
       })
       .addCase(fetchProperties.fulfilled, (state, action) => {
         state.loading = false;
-        state.items = action.payload; // Storing all properties
+        state.items = action.payload;
       })
       .addCase(fetchProperties.rejected, (state, action) => {
         state.loading = false;
@@ -84,7 +100,7 @@ const propertiesSlice = createSlice({
       })
       .addCase(fetchPropertyById.fulfilled, (state, action) => {
         state.loading = false;
-        state.selectedProperty = action.payload; // Storing the specific property
+        state.selectedProperty = action.payload;
       })
       .addCase(fetchPropertyById.rejected, (state, action) => {
         state.loading = false;
@@ -97,7 +113,7 @@ const propertiesSlice = createSlice({
       })
       .addCase(fetchBidsByPropertyId.fulfilled, (state, action) => {
         state.loading = false;
-        state.bids = action.payload; // Storing bids for the specific property
+        state.bids = action.payload;
       })
       .addCase(fetchBidsByPropertyId.rejected, (state, action) => {
         state.loading = false;
@@ -110,9 +126,22 @@ const propertiesSlice = createSlice({
       })
       .addCase(fetchPropertyCount.fulfilled, (state, action) => {
         state.loading = false;
-        state.propertyCount = action.payload; 
+        state.propertyCount = action.payload;
       })
       .addCase(fetchPropertyCount.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // Handling compare bids by property ID
+      .addCase(compareBidsById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(compareBidsById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.comparedBids = action.payload;
+      })
+      .addCase(compareBidsById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

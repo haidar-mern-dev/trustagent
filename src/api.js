@@ -64,3 +64,6 @@ export const getBidsByProperty = async () => {
 export const getPropertyCount = async () => {
   return await request(`property/count`, 'GET',null, true); 
 };
+export const comparedBids = async (id) => {
+  return await request(`bid/${id}/compare`, 'PATCH',null, true); 
+};
